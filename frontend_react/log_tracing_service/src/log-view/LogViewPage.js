@@ -37,7 +37,6 @@ function LogViewPage() {
 
     return (
         <div>
-            <div>로그 보는 곳</div>
             <LogList logList={logList} />
         </div>
     )

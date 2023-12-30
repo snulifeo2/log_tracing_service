@@ -5,7 +5,6 @@ import LogViewPage from './log-view/LogViewPage';
 function App() {
   return (
     <div>
-      초기 페이지
     <BrowserRouter>
       <Routes>
         <Route path="/logview/:pathValue" element={<LogViewPage />} />
