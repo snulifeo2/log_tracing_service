@@ -1,5 +1,6 @@
 package io.axiology.logservice.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,6 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+	
+	@Value("${runtimeconfig.logtraceservice.security.basic.username}")
+	private String username;
+	
+	@Value("${runtimeconfig.logtraceservice.security.basic.password}")
+	private String password;
+	
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -28,7 +36,7 @@ public class SecurityConfig {
 	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
 
-		UserDetails user = User.builder().username("").password(passwordEncoder().encode(""))
+		UserDetails user = User.builder().username(username).password(passwordEncoder().encode(password))
 				.roles("USER").build();
 
 		return new InMemoryUserDetailsManager(user);
