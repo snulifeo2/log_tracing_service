@@ -12,7 +12,7 @@ function LogList(props) {
     return (
         <div ref={scrollRef} style={{ 
             overflowY: 'auto', 
-            maxHeight: '50vh', // 높이를 뷰포트의 50%로 설정
+            maxHeight: '80vh', // 높이를 뷰포트의 50%로 설정
             width: '80vw', // 너비를 뷰포트의 80%로 설정
             margin: 'auto' // 중앙 정렬
           }}>

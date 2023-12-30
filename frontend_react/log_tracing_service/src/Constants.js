@@ -1,1 +1,1 @@
-export const API_WS_URL = 'ws://localhost:54321';
+export const API_WS_URL = 'ws://axiology.iptime.org:54321';
