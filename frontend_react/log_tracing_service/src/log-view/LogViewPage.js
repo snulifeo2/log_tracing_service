@@ -16,24 +16,22 @@ function LogViewPage() {
     const { pathValue } = useParams();
     const [logList, setLogList] = useState([]);
 
-    useEffect(
-        () => {
-            wsClient.onConnect = () => {
-                console.log("웹소켓 연결 됨")
-                wsClient.subscribe(`/sub/${pathValue}`, (msg) => {
-                    console.log(msg.body)
-                    const newLog = JSON.parse(msg.body);
-                    setLogList((prevState) => [...prevState, newLog]);
-                    console.log(logList);
-
-                });
-            };
-            wsClient.activate();
-        }, [logList]
-    );
-
-
-
+    useEffect(() => {
+        wsClient.onConnect = () => {
+            console.log("웹소켓 연결 됨")
+            wsClient.subscribe(`/sub/${pathValue}`, (msg) => {
+                console.log(msg.body)
+                const newLog = JSON.parse(msg.body);
+                const newLogWithTimestamp = {
+                    ...newLog,
+                    timestamp: new Date() // 현재 시간을 timestamp로 추가
+                };
+                setLogList((prevState) => [...prevState, newLogWithTimestamp]);
+                console.log(logList);
+            });
+        };
+        wsClient.activate();
+    }, [pathValue, wsClient]); // 'logList'를 의존성 목록에서 제거
 
     return (
         <div>
@@ -41,5 +39,6 @@ function LogViewPage() {
         </div>
     )
 }
+
 
 export default LogViewPage

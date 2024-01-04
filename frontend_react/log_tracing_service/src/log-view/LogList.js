@@ -85,10 +85,8 @@ o:::::::::::::::om::::m   m::::m   m::::m  n::::n    n::::ni::::::i     l::::::l
                     tagColors[log.logTag] = availableColors[Object.keys(tagColors).length % availableColors.length];
                 }
 
-                // 예외 메시지 확인
                 const isException = log.logMessage.toLowerCase().includes('exception');
-                const currentTime = formatTime(new Date());
-
+                const currentTime = formatTime(new Date(log.timestamp)); // 로그 객체에 저장된 시간을 사용
 
                 return (
                     <div key={index} style={isException ? exceptionStyle : {}}>
@@ -97,6 +95,8 @@ o:::::::::::::::om::::m   m::::m   m::::m  n::::n    n::::ni::::::i     l::::::l
                     </div>
                 );
             })}
+
+
         </div>
     );
 }
